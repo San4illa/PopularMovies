@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="title_activity_detail">DetailActivity</string>
+
+    <string name="prefix_normal_quality">http://image.tmdb.org/t/p/w500/</string>
+    <string name="prefix_high_quality">http://image.tmdb.org/t/p/original/</string>
+
+    <string name="error_message">Error loading weather :(    Retry</string>
+</resources>
