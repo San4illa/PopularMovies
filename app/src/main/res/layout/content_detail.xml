@@ -34,8 +34,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_poster"
-            app:layout_constraintTop_toTopOf="@+id/iv_poster"
-            tools:text="Фантастические твари и где они обитают" />
+            app:layout_constraintTop_toTopOf="@+id/iv_poster" />
 
         <TextView
             android:id="@+id/tv_release_date"
@@ -45,8 +44,7 @@
             android:layout_marginTop="12dp"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_poster"
-            tools:text="20 ноября 2017" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
 
         <TextView
             android:id="@+id/tv_rating"
@@ -55,8 +53,7 @@
             android:layout_marginEnd="20dp"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_poster"
-            tools:text="8.7" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
 
         <View
             android:layout_width="0dp"
@@ -77,8 +74,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_poster"
-            tools:text="Гарри Поттер во время обучения читал книгу известного писателя и члена общества чародеев Ньюта Саламандера. Эта картина расскажет о приключениях автора за семь десятков лет до того, как паренёк в очках впервые открыл переплёт." />
+            app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
 
         <View
             android:layout_width="0dp"

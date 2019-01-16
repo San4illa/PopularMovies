@@ -11,9 +11,12 @@ import java.util.List;
 
 public class MovieListLoader extends AsyncTaskLoader<List<Movie>> {
     private List<Movie> movies;
+    private int type;
 
-    MovieListLoader(Context context) {
+    MovieListLoader(Context context, int type) {
         super(context);
+
+        this.type = type;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class MovieListLoader extends AsyncTaskLoader<List<Movie>> {
 
     @Override
     public List<Movie> loadInBackground() {
-        DataProvider dataProvider = new DataProvider(getContext());
-        return dataProvider.getData();
+        DataProvider dataProvider = new DataProvider(getContext(), type);
+        return dataProvider.getMovies();
     }
 }

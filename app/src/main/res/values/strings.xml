@@ -7,5 +7,10 @@
     <string name="prefix_normal_quality">http://image.tmdb.org/t/p/w500/</string>
     <string name="prefix_high_quality">http://image.tmdb.org/t/p/original/</string>
 
-    <string name="error_message">Error loading weather :(    Retry</string>
+    <string name="error_loading_message">Error loading movies :(    Retry</string>
+    <string name="empty_favorites_message">No favorited movies</string>
+
+    <string name="page_title_popular">Popular</string>
+    <string name="page_title_top_rated">Top Rated</string>
+    <string name="page_title_favorites">Favorites</string>
 </resources>

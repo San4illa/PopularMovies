@@ -22,7 +22,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieListFragment extends Fragment {
-    private static final int LOADER_ID = 1;
+    private static final int POPULAR = 0;
+    private static final int TOP_RATED = 1;
+    private static final int FAVORITES = 2;
+
+    private static final int[] FRAGMENT_TYPES = {
+            POPULAR,
+            TOP_RATED,
+            FAVORITES
+    };
+
+    private int fragmentType;
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
@@ -30,6 +40,14 @@ public class MovieListFragment extends Fragment {
 
     private MovieAdapter adapter;
     private ArrayList<Movie> movies = new ArrayList<>();
+
+    public static MovieListFragment newInstance(int page) {
+        Bundle args = new Bundle();
+        args.putInt("type", FRAGMENT_TYPES[page]);
+        MovieListFragment fragment = new MovieListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -40,6 +58,8 @@ public class MovieListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        fragmentType = getArguments().getInt("type", -1);
 
         recyclerView = view.findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);
@@ -55,25 +75,26 @@ public class MovieListFragment extends Fragment {
 
         progressBar = view.findViewById(R.id.pb);
         errorView = view.findViewById(R.id.error);
-        errorView.setOnClickListener(v -> startLoading(true));
 
-        startLoading(false);
+        if (fragmentType != 2) {
+            errorView.setOnClickListener(v -> startLoading(true));
+            startLoading(false);
+        }
     }
 
     private void startLoading(boolean restart) {
         LoaderManager.LoaderCallbacks<List<Movie>> callbacks = new MovieListFragment.MovieListCallback();
 
         if (restart) {
-            getActivity().getSupportLoaderManager().restartLoader(LOADER_ID, null, callbacks);
+            getActivity().getSupportLoaderManager().restartLoader(fragmentType, null, callbacks);
         } else {
-            getActivity().getSupportLoaderManager().initLoader(LOADER_ID, null, callbacks);
+            getActivity().getSupportLoaderManager().initLoader(fragmentType, null, callbacks);
         }
 
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.INVISIBLE);
         errorView.setVisibility(View.GONE);
     }
-
 
     private void showMovies(List<Movie> movies) {
         if (movies.size() == 0) {
@@ -91,6 +112,11 @@ public class MovieListFragment extends Fragment {
 
     private void showError() {
         progressBar.setVisibility(View.GONE);
+
+        if (fragmentType == 2) {
+            errorView.setText(getString(R.string.empty_favorites_message));
+        }
+
         errorView.setVisibility(View.VISIBLE);
     }
 
@@ -98,7 +124,7 @@ public class MovieListFragment extends Fragment {
         @NonNull
         @Override
         public Loader<List<Movie>> onCreateLoader(int id, Bundle args) {
-            return new MovieListLoader(getContext());
+            return new MovieListLoader(getContext(), fragmentType);
         }
 
         @Override
@@ -108,6 +134,15 @@ public class MovieListFragment extends Fragment {
 
         @Override
         public void onLoaderReset(@NonNull Loader<List<Movie>> loader) {
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (fragmentType == 2) {
+            startLoading(true);
         }
     }
 }

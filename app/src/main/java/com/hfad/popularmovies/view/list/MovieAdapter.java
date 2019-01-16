@@ -2,6 +2,7 @@ package com.hfad.popularmovies.view.list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,9 +57,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
             itemView.setOnClickListener(v -> {
                 Context context = v.getContext();
                 Movie movie = movies.get(getAdapterPosition());
-                int id = movie.getId();
                 Intent intent = new Intent(context, MovieDetailActivity.class);
-                intent.putExtra("movie", id);
+                intent.putExtra("movie", movie);
                 context.startActivity(intent);
             });
         }
